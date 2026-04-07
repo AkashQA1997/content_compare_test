@@ -17,10 +17,12 @@ function getShortName(input: string): string {
 const elementsToMask = [
   `//div[@class="slick marquee award-bg slick-initialized slick-slider"]`,
   `//video[@class="banner-video"]`,
-  //  `//div[@class='img-container']/img[@alt='Chatbot avatar']`,
-  //  `//div[@id='headerIconContainer']/img[@alt='Chatbot avatar']`,
-  //  `//div[@id='chatWindow']`,
-  `(//div[@class='slick-track'])[3]`,
+  `//div[@class='img-container']/img[@alt='Chatbot avatar']`,
+  `//div[@id='headerIconContainer']/img[@alt='Chatbot avatar']`,
+  `//div[@id='chatWindow']`,
+  `(//div[@class='slider-for slick-initialized slick-slider'])[2]`,
+  `(//div[@class='slider-for slick-initialized slick-slider'])[1]`,
+  `//div[@class="container-fluid container-poster-slider section-block"]`,
 ];
 
 // Helper: Get locators for masking
@@ -85,11 +87,12 @@ urlPairs.forEach((urlPair, index) => {
         console.log(`📸 UPDATE MODE: ${shortName}`);
 
         await page.goto(urlPair.live);
+        console.log("Live URL loaded " + urlPair.live);
         await page.waitForLoadState("load");
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(5000);
+        await page.waitForTimeout(60000);
 
         const maskLocators = await getMaskLocators(page);
 
@@ -111,7 +114,7 @@ urlPairs.forEach((urlPair, index) => {
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(5000);
+        await page.waitForTimeout(60000);
 
         const maskLocators = await getMaskLocators(page);
 
