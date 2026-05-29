@@ -37,12 +37,13 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    /* 
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
     },
-
-    /* 
+*/
+    
 
     {
       name: 'chromium',
@@ -50,8 +51,8 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
     
         headless: true,              // MUST for low CPU
-        viewport: { width: 1280, height: 720 }, // smaller viewport = less rendering
-    /*    launchOptions: {
+        viewport: { width: 1920, height: 1080 }, // smaller viewport = less rendering
+       launchOptions: {
           args: [
             '--disable-gpu',
             '--disable-extensions',
@@ -67,7 +68,7 @@ export default defineConfig({
           
       }
     }
-    */
+    
     /*,
 
     {

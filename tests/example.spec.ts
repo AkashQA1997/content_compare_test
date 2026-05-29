@@ -15,6 +15,9 @@ function getShortName(input: string): string {
 
 // Masking configuration
 const elementsToMask = [
+  `//div[@id='block-views-block-homepage-spotlights-block-1']`,
+  `//img[contains(@src, '/Whatsaap-high-n.gif')]`,
+  `//a[contains(@class,'whatsapp-btn')]`,
   `//div[@class="slick marquee award-bg slick-initialized slick-slider"]`,
   `//video[@class="banner-video"]`,
   `//div[@class='img-container']/img[@alt='Chatbot avatar']`,
@@ -40,6 +43,21 @@ async function getMaskLocators(page: any): Promise<any[]> {
     } catch {}
   }
   return maskLocators;
+}
+
+const closeButtonXPath = `//span[@class="button b-close"]`;
+
+// Helper: Dismiss popup close button when present
+async function clickCloseButtonIfPresent(page: any) {
+  const closeButton = page.locator(`xpath=${closeButtonXPath}`);
+  const count = await closeButton.count();
+  for (let i = 0; i < count; i++) {
+    const btn = closeButton.nth(i);
+    if (await btn.isVisible()) {
+      await btn.click({ timeout: 5000 });
+      await page.waitForTimeout(500);
+    }
+  }
 }
 
 // Helper: Lazy scroll
@@ -92,7 +110,8 @@ urlPairs.forEach((urlPair, index) => {
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(60000);
+        await page.waitForTimeout(20000);
+        await clickCloseButtonIfPresent(page);
 
         const maskLocators = await getMaskLocators(page);
 
@@ -114,7 +133,8 @@ urlPairs.forEach((urlPair, index) => {
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(60000);
+        await page.waitForTimeout(20000);
+        await clickCloseButtonIfPresent(page);
 
         const maskLocators = await getMaskLocators(page);
 

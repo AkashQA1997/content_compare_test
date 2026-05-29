@@ -9,9 +9,12 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@playwright/test": "^1.57.0",
+    "@playwright/test": "^1.59.1",
     "@types/node": "^25.0.3",
     "pixelmatch": "^7.1.0",
     "pngjs": "^7.0.0"
+  },
+  "dependencies": {
+    "playwright": "^1.59.1"
   }
 }
