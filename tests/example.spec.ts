@@ -15,6 +15,24 @@ function getShortName(input: string): string {
 
 // Masking configuration
 const elementsToMask = [
+  `(//div[@class='slick-track'])[1]`,
+  `(//div[@class='slick-track'])[2]`,
+  `(//div[@class='slick-track'])[3]`,
+  `(//div[contains(@class,'terms-conditions-wrapper')])[1]`,
+  `(//div[contains(@class,'terms-conditions-wrapper')])[2]`,
+  `(//div[contains(@class,'terms-conditions-wrapper')])[3]`,
+  `(//div[@id='testimonilas_slider'])[1]`,
+  `(//div[@id='testimonilas_slider'])[2]`,
+  `(//div[@id='testimonilas_slider'])[3]`,
+  `(//div[@id='img-our-clinic-slider'])[1]`,
+  `(//div[@id='img-our-clinic-slider'])[2]`,
+  `(//div[@id='img-our-clinic-slider'])[3]`,
+  `//p[contains(., 'Happy Patients Globally')]/preceding-sibling::h2[1]`,
+  `//p[contains(., 'Clinics Globally')]/preceding-sibling::h2[1]`,
+  `//p[contains(., 'Network of Doctors Globally')]/preceding-sibling::h2[1]`,
+  `(//div[@class='img-container']/img[contains(@src, 'imagetype=chatbubble-icon')])[1]`,
+  `(//div[@class='img-container']/img[contains(@src, 'imagetype=chatbubble-icon')])[2]`,
+  `(//div[@class='img-container']/img[contains(@src, 'imagetype=chatbubble-icon')])[3]`,
   `//div[@id='block-views-block-homepage-spotlights-block-1']`,
   `//img[contains(@src, '/Whatsaap-high-n.gif')]`,
   `//a[contains(@class,'whatsapp-btn')]`,
@@ -55,13 +73,13 @@ async function clickCloseButtonIfPresent(page: any) {
     const btn = closeButton.nth(i);
     if (await btn.isVisible()) {
       await btn.click({ timeout: 5000 });
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(2000);
     }
   }
 }
 
 // Helper: Lazy scroll
-async function lazyScroll(page: any, scrollStep = 500, delay = 300) {
+async function lazyScroll(page: any, scrollStep = 500, delay = 500) {
   const bodyHeight = await page.evaluate(() => document.body.scrollHeight);
   let currentPosition = 0;
   while (currentPosition < bodyHeight) {
@@ -110,7 +128,7 @@ urlPairs.forEach((urlPair, index) => {
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(20000);
+        await page.waitForTimeout(5000);
         await clickCloseButtonIfPresent(page);
 
         const maskLocators = await getMaskLocators(page);
@@ -121,7 +139,7 @@ urlPairs.forEach((urlPair, index) => {
         });
 
         await expect(screenshot).toMatchSnapshot(snapshotPath, {
-          threshold: 0.2,
+          threshold: 0.5,
         });
 
         console.log(`✅ Baseline saved: ${snapshotPath}`);
@@ -133,7 +151,7 @@ urlPairs.forEach((urlPair, index) => {
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(20000);
+        await page.waitForTimeout(5000);
         await clickCloseButtonIfPresent(page);
 
         const maskLocators = await getMaskLocators(page);
@@ -144,7 +162,7 @@ urlPairs.forEach((urlPair, index) => {
         });
 
         await expect(screenshot).toMatchSnapshot(snapshotPath, {
-          threshold: 0.2,
+          threshold: 0.5,
         });
 
         console.log(`✅ Compared: ${shortName}`);

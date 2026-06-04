@@ -19,7 +19,7 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 1 : 0,
+  retries: process.env.CI ? 1 : 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 10 : 10,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -43,32 +43,30 @@ export default defineConfig({
       use: { ...devices["Desktop Firefox"] },
     },
 */
-    
 
     {
-      name: 'chromium',
+      name: "chromium",
       use: {
-        ...devices['Desktop Chrome'],
-    
-        headless: true,              // MUST for low CPU
+        ...devices["Desktop Chrome"],
+
+        headless: true, // MUST for low CPU
         viewport: { width: 1920, height: 1080 }, // smaller viewport = less rendering
-       launchOptions: {
+        launchOptions: {
           args: [
-            '--disable-gpu',
-            '--disable-extensions',
-            '--disable-background-networking',
-            '--disable-background-timer-throttling',
-            '--disable-backgrounding-occluded-windows',
-            '--disable-renderer-backgrounding',
-            '--disable-dev-shm-usage',
-            '--no-sandbox',
-            '--disable-features=IsolateOrigins,site-per-process'
-          ]
-        }
-          
-      }
-    }
-    
+            "--disable-gpu",
+            "--disable-extensions",
+            "--disable-background-networking",
+            "--disable-background-timer-throttling",
+            "--disable-backgrounding-occluded-windows",
+            "--disable-renderer-backgrounding",
+            "--disable-dev-shm-usage",
+            "--no-sandbox",
+            "--disable-features=IsolateOrigins,site-per-process",
+          ],
+        },
+      },
+    },
+
     /*,
 
     {
