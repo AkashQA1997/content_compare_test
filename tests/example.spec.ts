@@ -27,6 +27,9 @@ const elementsToMask = [
   `(//div[@id='img-our-clinic-slider'])[1]`,
   `(//div[@id='img-our-clinic-slider'])[2]`,
   `(//div[@id='img-our-clinic-slider'])[3]`,
+  `(//div[contains(@class,'recent-blog-list')])[1]`,
+  `(//div[contains(@class,'recent-blog-list')])[2]`,
+  `(//div[contains(@class,'recent-blog-list')])[3]`,
   `//p[contains(., 'Happy Patients Globally')]/preceding-sibling::h2[1]`,
   `//p[contains(., 'Clinics Globally')]/preceding-sibling::h2[1]`,
   `//p[contains(., 'Network of Doctors Globally')]/preceding-sibling::h2[1]`,
@@ -128,7 +131,7 @@ urlPairs.forEach((urlPair, index) => {
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(5000);
+        //await page.waitForTimeout(5000);
         await clickCloseButtonIfPresent(page);
 
         const maskLocators = await getMaskLocators(page);
@@ -151,7 +154,7 @@ urlPairs.forEach((urlPair, index) => {
         // await page.waitForLoadState('networkidle');
         await page.waitForLoadState("domcontentloaded");
         await lazyScroll(page);
-        await page.waitForTimeout(5000);
+        //await page.waitForTimeout(5000);
         await clickCloseButtonIfPresent(page);
 
         const maskLocators = await getMaskLocators(page);
