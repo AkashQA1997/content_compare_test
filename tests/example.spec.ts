@@ -87,7 +87,7 @@ async function lazyScroll(page: any, scrollStep = 500, delay = 500) {
   let currentPosition = 0;
   while (currentPosition < bodyHeight) {
     currentPosition += scrollStep;
-    await page.evaluate((pos) => window.scrollTo(0, pos), currentPosition);
+    await page.evaluate((pos: number) => window.scrollTo(0, pos), currentPosition);
     await page.waitForTimeout(delay);
   }
   await page.evaluate(() => window.scrollTo(0, 0));
