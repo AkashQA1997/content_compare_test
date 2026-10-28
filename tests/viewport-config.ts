@@ -1,15 +1,10 @@
-// Viewport configurations for different device types
-// Uncomment the viewports you want to test
+/**
+ * Viewports the comparison runs. One full-page screenshot per entry.
+ * Two desktop sizes and two phone sizes.
+ */
 export const viewports = {
-   desktop: { width: 1920, height: 1080 },
-  // tablet: { width: 768, height: 1024 },
-  //mobile: { width: 375, height: 667 },
+  desktopLarge: { width: 1920, height: 1080 },
+  desktopSmall: { width: 1366, height: 768 },
+  mobileLarge: { width: 390, height: 844 },
+  mobileSmall: { width: 360, height: 800 },
 };
-
-// You can also create custom viewport configurations
-export const customViewports = {
-  largeDesktop: { width: 2560, height: 1440 },
-  smallMobile: { width: 320, height: 568 },
-  // Add your custom viewports here
-};
-

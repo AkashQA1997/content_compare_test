@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { urlPairs } from "./test-data";
 import { viewports } from "./viewport-config";
-import crypto from "crypto";
+import { elementsToMask } from "./elements-to-mask";
+import { createHash } from "crypto";
 
 /**
  * MASKED SCREENSHOT WITH LAZY SCROLL
@@ -9,45 +10,9 @@ import crypto from "crypto";
 
 // ------------------ NEW: Short Name Generator ------------------
 function getShortName(input: string): string {
-  return crypto.createHash("md5").update(input).digest("hex").substring(0, 8);
+  return createHash("md5").update(input).digest("hex").substring(0, 8);
 }
 // ---------------------------------------------------------------
-
-// Masking configuration
-const elementsToMask = [
-  `(//div[@class='slick-track'])[1]`,
-  `(//div[@class='slick-track'])[2]`,
-  `(//div[@class='slick-track'])[3]`,
-  `(//div[contains(@class,'terms-conditions-wrapper')])[1]`,
-  `(//div[contains(@class,'terms-conditions-wrapper')])[2]`,
-  `(//div[contains(@class,'terms-conditions-wrapper')])[3]`,
-  `(//div[@id='testimonilas_slider'])[1]`,
-  `(//div[@id='testimonilas_slider'])[2]`,
-  `(//div[@id='testimonilas_slider'])[3]`,
-  `(//div[@id='img-our-clinic-slider'])[1]`,
-  `(//div[@id='img-our-clinic-slider'])[2]`,
-  `(//div[@id='img-our-clinic-slider'])[3]`,
-  `(//div[contains(@class,'recent-blog-list')])[1]`,
-  `(//div[contains(@class,'recent-blog-list')])[2]`,
-  `(//div[contains(@class,'recent-blog-list')])[3]`,
-  `//p[contains(., 'Happy Patients Globally')]/preceding-sibling::h2[1]`,
-  `//p[contains(., 'Clinics Globally')]/preceding-sibling::h2[1]`,
-  `//p[contains(., 'Network of Doctors Globally')]/preceding-sibling::h2[1]`,
-  `(//div[@class='img-container']/img[contains(@src, 'imagetype=chatbubble-icon')])[1]`,
-  `(//div[@class='img-container']/img[contains(@src, 'imagetype=chatbubble-icon')])[2]`,
-  `(//div[@class='img-container']/img[contains(@src, 'imagetype=chatbubble-icon')])[3]`,
-  `//div[@id='block-views-block-homepage-spotlights-block-1']`,
-  `//img[contains(@src, '/Whatsaap-high-n.gif')]`,
-  `//a[contains(@class,'whatsapp-btn')]`,
-  `//div[@class="slick marquee award-bg slick-initialized slick-slider"]`,
-  `//video[@class="banner-video"]`,
-  `//div[@class='img-container']/img[@alt='Chatbot avatar']`,
-  `//div[@id='headerIconContainer']/img[@alt='Chatbot avatar']`,
-  `//div[@id='chatWindow']`,
-  `(//div[@class='slider-for slick-initialized slick-slider'])[2]`,
-  `(//div[@class='slider-for slick-initialized slick-slider'])[1]`,
-  `//div[@class="container-fluid container-poster-slider section-block"]`,
-];
 
 // Helper: Get locators for masking
 async function getMaskLocators(page: any): Promise<any[]> {

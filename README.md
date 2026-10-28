@@ -63,13 +63,19 @@ The report will show:
 - ❌ **Fail**: Screenshots differ (beyond 20% threshold)
 - **Visual Diff**: Actual, Expected, Diff, and Side-by-side with slider
 
-## Test Data
+## Demo data
 
-Edit `tests/test-data.ts` to add/modify URL pairs to compare.
+The repo ships with public pages so it can be shared and run without private URLs.
+
+| File | What to edit |
+| --- | --- |
+| `tests/test-data.ts` | URL pairs. First pair should match. Second pair is expected to show a diff. |
+| `tests/elements-to-mask.ts` | Regions painted over before compare (banner, footer, GitHub ribbon). |
+| `tests/viewport-config.ts` | Two desktop sizes (1920×1080, 1366×768) and two phone sizes (390×844, 360×800). |
 
 ## Notes
 
 - **Baseline must exist**: If baseline snapshot doesn't exist, test will fail. Run `--update-snapshots` first.
-- **Threshold**: 20% pixel difference is allowed before test fails
-- **Viewports**: Currently testing desktop view only (tablet/mobile commented out)
+- **Threshold**: color distance of `0.5` per pixel (`threshold` in the spec)
+- **Expected result**: the TodoMVC pair passes after a baseline update. The the-internet pair fails on purpose so the HTML report shows a visual diff.
 
